@@ -1,0 +1,46 @@
+@import "../../styles/mixins";
+
+.App {
+  height: 100%;
+  @include make-flex();
+  
+  &__header {
+    font-size: calc(10px + 2vmin);
+    color: white;
+    @include make-flex();
+    gap: 15px;
+  }
+  &__todoItem {
+    @include make-flex($align: flex-start);
+    height: 50px;
+    width: 400px;
+    color: #282c34;
+    border-radius: 5px;
+    padding: 0 15px;
+    font-size: large;
+    text-transform: capitalize;
+    cursor: pointer;
+    position: relative;
+
+    background-color: #b8f0ff;
+    &--completed {
+      background-color: #505050;
+      color: white;
+      text-decoration: line-through;
+    }
+    img {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      height: 28px;
+    }
+  }
+  &__input {
+    height: 50px;
+    width: 400px;
+    border-radius: 5px;
+    border: none;
+    padding: 0 10px;
+    font-size: large;
+  }
+}
