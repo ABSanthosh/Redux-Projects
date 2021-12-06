@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { createStore, action } from "easy-peasy";
 
 const Store = createStore({

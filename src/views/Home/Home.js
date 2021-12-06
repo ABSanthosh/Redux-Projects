@@ -1,7 +1,7 @@
 import "./Home.scss";
 import { useState } from "react";
 import deleteBin from "../../Assets/Img/delete.png";
-import { useStoreState, useStoreActions, action } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 export default function Home() {
   const [newTodo, setNewTodo] = useState("");
@@ -10,12 +10,6 @@ export default function Home() {
   const addTodo = useStoreActions((action) => action.addTodo);
   const removeTodo = useStoreActions((action) => action.removeTodo);
   const toggleTodo = useStoreActions((action) => action.toggleTodo);
-
-  const handleSubmit = (e) => {};
-
-  const handleCompletion = (id) => {};
-
-  const handleRemoval = (id) => {};
 
   return (
     <div className="App">
