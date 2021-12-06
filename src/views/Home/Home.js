@@ -1,15 +1,10 @@
 import "./Home.scss";
 import { useState } from "react";
 import deleteBin from "../../Assets/Img/delete.png";
-import { useStoreState, useStoreActions } from "easy-peasy";
 
 export default function Home() {
   const [newTodo, setNewTodo] = useState("");
-  const todos = useStoreState((state) => state.todo);
-
-  const addTodo = useStoreActions((action) => action.addTodo);
-  const removeTodo = useStoreActions((action) => action.removeTodo);
-  const toggleTodo = useStoreActions((action) => action.toggleTodo);
+  
 
   return (
     <div className="App">
@@ -21,11 +16,7 @@ export default function Home() {
           onKeyPress={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              addTodo({
-                id: Math.ceil(Math.random() * 100),
-                text: newTodo,
-                completed: false,
-              });
+              
               document.querySelector(".App__input").value = "";
             }
           }}
@@ -33,7 +24,7 @@ export default function Home() {
           placeholder="Add todo"
           type="text"
         />
-        {todos.map((item, index) => (
+        {/* {todos.map((item, index) => (
           <div
             key={index}
             onClick={() => toggleTodo(item.id)}
@@ -48,7 +39,7 @@ export default function Home() {
               src={deleteBin}
             />
           </div>
-        ))}
+        ))} */}
       </header>
     </div>
   );
