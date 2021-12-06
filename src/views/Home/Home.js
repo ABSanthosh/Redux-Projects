@@ -1,41 +1,21 @@
 import "./Home.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import deleteBin from "../../Assets/Img/delete.png";
+import { useStoreState, useStoreActions, action } from "easy-peasy";
 
 export default function Home() {
-  const todo = useSelector((state) => state.todo);
   const [newTodo, setNewTodo] = useState("");
-  const dispatch = useDispatch();
+  const todos = useStoreState((state) => state.todo);
 
-  const handleSubmit = (e) => {
-    dispatch({
-      type: "ADD",
-      payload: {
-        id: Math.ceil(Math.random() * 100),
-        text: newTodo,
-        completed: false,
-      },
-    });
-  };
+  const addTodo = useStoreActions((action) => action.addTodo);
+  const removeTodo = useStoreActions((action) => action.removeTodo);
+  const toggleTodo = useStoreActions((action) => action.toggleTodo);
 
-  const handleCompletion = (id) => {
-    dispatch({
-      type: "TOGGLE",
-      payload: {
-        id: id,
-      },
-    });
-  };
+  const handleSubmit = (e) => {};
 
-  const handleRemoval = (id) => {
-    dispatch({
-      type: "REMOVE",
-      payload: {
-        id: id,
-      },
-    });
-  };
+  const handleCompletion = (id) => {};
+
+  const handleRemoval = (id) => {};
 
   return (
     <div className="App">
@@ -47,7 +27,11 @@ export default function Home() {
           onKeyPress={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              handleSubmit(e);
+              addTodo({
+                id: Math.ceil(Math.random() * 100),
+                text: newTodo,
+                completed: false,
+              });
               document.querySelector(".App__input").value = "";
             }
           }}
@@ -55,17 +39,17 @@ export default function Home() {
           placeholder="Add todo"
           type="text"
         />
-        {todo.map((item, index) => (
+        {todos.map((item, index) => (
           <div
             key={index}
-            onClick={() => handleCompletion(item.id)}
+            onClick={() => toggleTodo(item.id)}
             className={`App__todoItem ${
               item.completed ? "App__todoItem--completed" : ""
             }`}
           >
             {item.text}
             <img
-              onClick={() => handleRemoval(item.id)}
+              onClick={() => removeTodo(item.id)}
               alt="Delete Item"
               src={deleteBin}
             />
