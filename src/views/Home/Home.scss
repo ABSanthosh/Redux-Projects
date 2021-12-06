@@ -3,7 +3,7 @@
 .App {
   height: 100%;
   @include make-flex();
-  
+
   &__header {
     font-size: calc(10px + 2vmin);
     color: white;
@@ -21,8 +21,14 @@
     text-transform: capitalize;
     cursor: pointer;
     position: relative;
-
     background-color: #b8f0ff;
+
+    p {
+      height: 100%;
+      width: 90%;
+      @include make-flex($align: flex-start);
+    }
+
     &--completed {
       background-color: #505050;
       color: white;
